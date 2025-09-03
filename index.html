@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问被拒！</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-color: #fce4ec; /* 粉色系 */
+            color: #d81b60; /* 深粉色文字 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            padding: 40px;
+            background-color: #ffffff;
+            border: 5px dashed #f06292;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: bounceIn 1s ease-out;
+            max-width: 80%;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.1); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .emoji {
+            font-size: 8em;
+            margin-bottom: 20px;
+            animation: spinAndShake 2s infinite linear;
+            display: inline-block;
+        }
+
+        @keyframes spinAndShake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg) scale(1.05); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+            100% { transform: rotate(0deg); }
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px #ffc107;
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .reason {
+            font-weight: bold;
+            font-style: italic;
+            color: #880e4f;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f8bbd0;
+        }
+
+        .small-text {
+            font-size: 0.9em;
+            color: #999;
+            margin-top: 30px;
+        }
+
+        /* 鼠标追踪彩虹文字效果 */
+        #rainbow-text {
+            position: absolute;
+            font-size: 2em;
+            font-weight: bold;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-out, transform 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="emoji">🚫</div>
+        <h1>访问被拒！</h1>
+        <p>
+            很抱歉，您的访问请求已被宇宙安全局拦截。
+        </p>
+        <div class="reason">
+            理由：您的浏览器版本没有通过“可爱度”测试。
+        </div>
+        <p>
+            请尝试通过以下方式重新请求访问：<br>
+            1. 唱歌。<br>
+            2. 跳舞。<br>
+            3. 假装自己是一只企鹅。
+        </p>
+        <div class="small-text">
+            （当然，这只是个玩笑。可能只是服务器打了个盹儿，请稍后再试！）
+        </div>
+    </div>
+
+    <div id="rainbow-text"></div>
+
+    <script>
+        // 鼠标追踪彩虹文字效果
+        const rainbowText = document.getElementById('rainbow-text');
+        const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
+        let colorIndex = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            rainbowText.style.opacity = 1;
+            rainbowText.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            
+            rainbowText.textContent = '⛔️';
+            rainbowText.style.color = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            rainbowText.style.opacity = 0;
+        });
+
+        // 随机更换Emoji
+        const emojis = ['🚫', '⛔️', '🙅‍♀️', '🚷', '✋'];
+        const emojiElement = document.querySelector('.emoji');
+        setInterval(() => {
+            const randomIndex = Math.floor(Math.random() * emojis.length);
+            emojiElement.textContent = emojis[randomIndex];
+        }, 3000);
+    </script>
+
+</body>
+</html>
